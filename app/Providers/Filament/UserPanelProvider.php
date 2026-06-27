@@ -139,6 +139,7 @@ class UserPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth(Width::Full)
             ->brandName('Ufus Data')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')

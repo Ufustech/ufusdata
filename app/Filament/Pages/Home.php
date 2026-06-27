@@ -8,6 +8,7 @@ use Filament\Pages\Dashboard;
 
 class Home extends Dashboard
 {
+
     public function getWidgets(): array
     {
         return [

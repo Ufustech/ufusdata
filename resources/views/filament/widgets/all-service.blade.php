@@ -11,14 +11,22 @@
 
         .as-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
+        }
+
+        /* Mobile: 3 per row */
+        @media (max-width: 640px) {
+            .as-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
         }
 
         .as-card {
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            gap: 8px; padding: 1.1rem 0.75rem;
+            gap: 6px; padding: 1rem 0.5rem;
             border-radius: var(--theme-radius);
             border: 1px solid var(--theme-border-mid);
             border-top: 2px solid var(--theme-border-heavy);
@@ -46,7 +54,19 @@
             display: flex; align-items: center;
             justify-content: center; flex-shrink: 0;
         }
+
+        /* Smaller icon circle on mobile */
+        @media (max-width: 640px) {
+            .as-icon-wrap {
+                width: 38px; height: 38px;
+            }
+        }
+
         .as-icon-wrap svg { width: 22px; height: 22px; color: var(--theme-brass); }
+
+        @media (max-width: 640px) {
+            .as-icon-wrap svg { width: 18px; height: 18px; }
+        }
 
         .as-label {
             font-size: 0.75rem; font-weight: 700;
@@ -59,41 +79,36 @@
             text-align: center; line-height: 1.3;
         }
 
-        .dark .as-card {
-            background: var(--theme-surface-card);
-            border-color: var(--theme-border-mid);
+        /* Hide description on mobile to save space */
+        @media (max-width: 640px) {
+            .as-label { font-size: 0.68rem; }
+            .as-desc  { display: none; }
         }
-        .dark .as-card:hover {
-            background: var(--theme-surface-card);
-        }
-        .dark .as-card.active {
-            background: var(--theme-brass-dim);
-        }
+
+        .dark .as-card { background: var(--theme-surface-card); border-color: var(--theme-border-mid); }
+        .dark .as-card:hover { background: var(--theme-surface-card); }
+        .dark .as-card.active { background: var(--theme-brass-dim); }
     </style>
 
-    <div class="as-wrap">
-
-        {{-- Header --}}
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:1rem;
+    {{-- Header --}}
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:1rem;
                     padding-bottom:0.625rem; border-bottom:1px solid var(--theme-border-ornate);">
-            <x-heroicon-o-squares-2x2 class="as-header-icon" />
-            <span class="as-header-title">All Services</span>
-        </div>
+        <x-heroicon-o-squares-2x2 class="as-header-icon" />
+        <span class="as-header-title">All Services</span>
+    </div>
 
-        {{-- Grid --}}
-        <div class="as-grid">
-            @foreach ($this->getServices() as $service)
-                <a href="{{ $service['route'] }}"
-                   class="as-card {{ isset($service['active']) && $service['active'] ? 'active' : '' }}"
-                >
-                    <div class="as-icon-wrap">
-                        <x-dynamic-component :component="$service['icon']" />
-                    </div>
-                    <span class="as-label">{{ $service['label'] }}</span>
-                    <span class="as-desc">{{ $service['desc'] }}</span>
-                </a>
-            @endforeach
-        </div>
-
+    {{-- Grid --}}
+    <div class="as-grid">
+        @foreach ($this->getServices() as $service)
+            <a href="{{ $service['route'] }}"
+               class="as-card {{ isset($service['active']) && $service['active'] ? 'active' : '' }}"
+            >
+                <div class="as-icon-wrap">
+                    <x-dynamic-component :component="$service['icon']" />
+                </div>
+                <span class="as-label">{{ $service['label'] }}</span>
+                <span class="as-desc">{{ $service['desc'] }}</span>
+            </a>
+        @endforeach
     </div>
 </x-filament-widgets::widget>
