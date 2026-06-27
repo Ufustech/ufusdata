@@ -35,6 +35,7 @@ class HomePanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            ->brandName('Ufus Data')
             ->discoverWidgets(in: app_path('Filament/Home/Widgets'), for: 'App\Filament\Home\Widgets')
             ->widgets([
 //                AccountWidget::class,
