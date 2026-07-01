@@ -3,7 +3,9 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Home;
+use App\Filament\Pages\NinValidation;
 use Filament\Enums\UserMenuPosition;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -34,7 +36,7 @@ class UserPanelProvider extends PanelProvider
             ->id('user')
             ->path('user')
             ->viteTheme('resources/css/filament/user/theme.css')
-            ->login()
+            ->login(Login::class)
             ->passwordReset()
             ->registration()
             ->profile(EditProfile::class, isSimple: false)
@@ -55,22 +57,6 @@ class UserPanelProvider extends PanelProvider
                     ->icon(Heroicon::ArrowsRightLeft)
                     ->sort(2)
                     ->url(fn (): string => EditProfile::getUrl()),
-
-                NavigationItem::make('nin')
-                    ->label(fn (): string => __('NIN Verification'))
-                    ->sort(100)
-                    ->group('NIN Services')
-                    ->url(fn (): string => EditProfile::getUrl()),
-                NavigationItem::make('nin_phone')
-                    ->label(fn (): string => __('NIN Phone'))
-                    ->sort(101)
-                    ->group('NIN Services')
-                    ->url(fn (): string => EditProfile::getUrl()),
-                NavigationItem::make('nin_demo')
-                    ->label(fn (): string => __('NIN Demographic'))
-                    ->sort(102)
-                    ->group('NIN Services')
-                    ->url(fn (): string => EditProfile::getUrl()),
                 NavigationItem::make('person')
                     ->label(fn (): string => __('Personalization'))
                     ->sort(103)
@@ -81,11 +67,10 @@ class UserPanelProvider extends PanelProvider
                     ->sort(104)
                     ->group('NIN Services')
                     ->url(fn (): string => EditProfile::getUrl()),
-                NavigationItem::make('validation')
-                    ->label(fn (): string => __('NIN Validation'))
-                    ->group('NIN Services')
-                    ->sort(105)
-                    ->url(fn (): string => EditProfile::getUrl()),
+//                NavigationItem::make('validation')
+//                    ->label(fn (): string => __('NIN Validation'))
+//
+//                    ->url(fn (): string => NinValidation::getUrl()),
                 NavigationItem::make('modification')
                     ->label(fn (): string => __('NIN Modification'))
                     ->group('NIN Services')
